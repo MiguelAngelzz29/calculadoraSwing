@@ -40,8 +40,7 @@ public class Calculadora extends javax.swing.JFrame {
         jTextField1.setEditable(false);
 
     }
-    ComponentAdapter resizeListener = new ComponentAdapter() {
-    };
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
