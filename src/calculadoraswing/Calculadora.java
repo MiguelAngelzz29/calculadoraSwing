@@ -4,18 +4,13 @@
  */
 package calculadoraswing;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -24,7 +19,8 @@ import javax.swing.KeyStroke;
  * @author migue
  */
 public class Calculadora extends javax.swing.JFrame {
-  public JPanel jpanel;
+
+    public JPanel jpanel;
     public double numero;
     public char operador;
     public char signo;
@@ -33,16 +29,20 @@ public class Calculadora extends javax.swing.JFrame {
     public boolean primeraOperacion = true;
     public boolean hayDecimal = false;
     Modelo modelo = new Modelo();
+
     /**
      * Creates new form Calculadora
      */
-    
+
     public Calculadora() {
+
         initComponents();
         keyBidings();
-           
+        jTextField1.setEditable(false);
+
     }
- ComponentAdapter resizeListener = new ComponentAdapter() {};
+    ComponentAdapter resizeListener = new ComponentAdapter() {
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +73,7 @@ public class Calculadora extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -95,11 +95,6 @@ public class Calculadora extends javax.swing.JFrame {
         jButtonSumar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonSumar(evt);
-            }
-        });
-        jButtonSumar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSumarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -372,8 +367,7 @@ public class Calculadora extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     
-    
+
     private void botonDecimal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonDecimal
         if (!hayDecimal) {
             if (jTextField1.getText().isEmpty()) {
@@ -387,7 +381,7 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_botonDecimal
 
     private void botonSumar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSumar
-         pulsarOperador = true;
+        pulsarOperador = true;
         signo = '+';
         hacerOperacion();
         this.operador = '+';
@@ -395,6 +389,7 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void boton0(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton0
         insertarNumero("0");
+
     }//GEN-LAST:event_boton0
 
     private void botonRestar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRestar
@@ -410,6 +405,7 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void boton2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton2
         insertarNumero("2");
+
     }//GEN-LAST:event_boton2
 
     private void boton1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton1
@@ -439,7 +435,7 @@ public class Calculadora extends javax.swing.JFrame {
         pulsarOperador = true;
         signo = '/';
         hacerOperacion();
-        this.operador = '/';
+        operador = '/';
     }//GEN-LAST:event_botonDividir
 
     private void boton9(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton9
@@ -451,21 +447,18 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_boton8
 
     private void boton7(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton7
-       insertarNumero("7");
+        insertarNumero("7");
     }//GEN-LAST:event_boton7
 
-    private void jButtonSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSumarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSumarActionPerformed
-
-    private void insertarNumero(String numero) {
+    private void insertarNumero(String numeros) {
 
         if (pulsarOperador) {
             jTextField1.setText("");
             pulsarOperador = false;
         }
-        this.jTextField1.setText(this.jTextField1.getText() + numero);
-        this.numero = Double.parseDouble(this.jTextField1.getText());
+
+        jTextField1.setText(jTextField1.getText() + numeros);
+        numero = Double.parseDouble(jTextField1.getText());
 
     }
 
@@ -524,9 +517,6 @@ public class Calculadora extends javax.swing.JFrame {
         }
     }
 
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -558,12 +548,12 @@ public class Calculadora extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Calculadora().setVisible(true);
+
             }
         });
     }
 
     //KEYBIDINGS
-
     public void keyBidings() {
         this.jButton0.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke("0"), "0");
@@ -571,14 +561,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton0.doClick();
+                insertarNumero("0");
             }
         });
-          this.jButton0.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton0.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD0, 0), "0");
-        this.jButton0.getActionMap().put("0", new AbstractAction() {
+        this.jButton0.getActionMap().put(numero, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton0.doClick();
+                insertarNumero("0");
             }
         });
 
@@ -588,14 +580,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton1.doClick();
+                insertarNumero("1");
             }
         });
-          this.jButton1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD1, 0), "1");
         this.jButton1.getActionMap().put("1", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton1.doClick();
+                insertarNumero("1");
             }
         });
 
@@ -605,14 +599,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton2.doClick();
+                insertarNumero("2");
             }
         });
-          this.jButton2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD2, 0), "2");
         this.jButton2.getActionMap().put("2", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton2.doClick();
+                insertarNumero("2");
             }
         });
 
@@ -622,14 +618,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton3.doClick();
+                insertarNumero("3");
             }
         });
-          this.jButton3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD3, 0), "3");
         this.jButton3.getActionMap().put("3", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton3.doClick();
+                insertarNumero("3");
             }
         });
 
@@ -639,14 +637,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton4.doClick();
+                insertarNumero("4");
             }
         });
-          this.jButton4.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton4.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD4, 0), "4");
         this.jButton4.getActionMap().put("4", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton4.doClick();
+                insertarNumero("4");
             }
         });
 
@@ -656,14 +656,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton5.doClick();
+                insertarNumero("5");
             }
         });
-          this.jButton5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0), "5");
         this.jButton5.getActionMap().put("5", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton5.doClick();
+                insertarNumero("5");
             }
         });
 
@@ -673,14 +675,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton6.doClick();
+                insertarNumero("6");;
             }
         });
-          this.jButton6.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton6.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD6, 0), "6");
         this.jButton6.getActionMap().put("6", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton6.doClick();
+                insertarNumero("6");
             }
         });
         this.jButton7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -689,14 +693,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton7.doClick();
+                insertarNumero("7");
             }
         });
-          this.jButton7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD7, 0), "7");
         this.jButton7.getActionMap().put("7", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton7.doClick();
+                insertarNumero("7");
             }
         });
         this.jButton8.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -705,14 +711,16 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton8.doClick();
+                insertarNumero("8");
             }
         });
-          this.jButton8.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton8.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD8, 0), "8");
         this.jButton0.getActionMap().put("8", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton8.doClick();
+                insertarNumero("8");
             }
         });
 
@@ -722,95 +730,149 @@ public class Calculadora extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton9.doClick();
+                insertarNumero("9");
             }
         });
-          this.jButton9.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButton9.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD9, 0), "9");
         this.jButton9.getActionMap().put("9", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButton9.doClick();
+                insertarNumero("9");
             }
         });
-      
+
         this.jButtonSumar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0), "+");
         this.jButtonSumar.getActionMap().put("+", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonSumar.doClick();
+                pulsarOperador = true;
+                signo = '+';
+                hacerOperacion();
+                operador = '+';
+
             }
         });
-         this.jButtonSumar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonSumar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, 0), "+");
         this.jButtonSumar.getActionMap().put("+", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonSumar.doClick();
+                pulsarOperador = true;
+                signo = '+';
+                hacerOperacion();
+                operador = '+';
             }
         });
-         this.jButtonRestar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonRestar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, 0), "-");
         this.jButtonRestar.getActionMap().put("-", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonRestar.doClick();
+                pulsarOperador = true;
+                signo = '-';
+                hacerOperacion();
+                operador = '-';
             }
         });
-       this.jButtonRestar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonRestar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, 0), "-");
         this.jButtonRestar.getActionMap().put("-", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonRestar.doClick();
+                pulsarOperador = true;
+                signo = '-';
+                hacerOperacion();
+                operador = '-';
             }
         });
-         this.jButtonMultiplicar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonMultiplicar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_MULTIPLY, 0), "*");
         this.jButtonMultiplicar.getActionMap().put("*", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonMultiplicar.doClick();
+                pulsarOperador = true;
+                signo = '*';
+                hacerOperacion();
+                operador = '*';
             }
         });
-         this.jButtonMultiplicar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonMultiplicar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.SHIFT_DOWN_MASK), "*");
         this.jButtonMultiplicar.getActionMap().put("*", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonMultiplicar.doClick();
+                pulsarOperador = true;
+                signo = '*';
+                hacerOperacion();
+                operador = '*';
             }
         });
-          this.jButtonDividir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonDividir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_DIVIDE, 0), "/");
         this.jButtonDividir.getActionMap().put("/", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonDividir.doClick();
+                pulsarOperador = true;
+                signo = '/';
+                hacerOperacion();
+                operador = '/';
             }
         });
-          this.jButtonDividir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        this.jButtonDividir.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.SHIFT_DOWN_MASK), "/");
         this.jButtonDividir.getActionMap().put("/", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonDividir.doClick();
+                pulsarOperador = true;
+                signo = '/';
+                hacerOperacion();
+                operador = '/';
             }
         });
-          this.jButtonDecimal.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_DECIMAL, 0), "*");
-        this.jButtonDecimal.getActionMap().put("*", new AbstractAction() {
+        this.jButtonDecimal.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_DECIMAL, 0), ".");
+        this.jButtonDecimal.getActionMap().put(".", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonDecimal.doClick();
+                if (!hayDecimal) {
+                    if (jTextField1.getText().isEmpty()) {
+                        insertarNumero("0.");
+                        hayDecimal = true;
+                    } else {
+                        insertarNumero(".");
+                        hayDecimal = true;
+                    }
+                }
+
             }
         });
-          this.jButtonDecimal.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_COMMA, 0), "*");
-        this.jButtonDecimal.getActionMap().put("*", new AbstractAction() {
+        this.jButtonDecimal.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_COMMA, 0), ".");
+        this.jButtonDecimal.getActionMap().put(".", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 jButtonDecimal.doClick();
+                if (!hayDecimal) {
+                    if (jTextField1.getText().isEmpty()) {
+                        insertarNumero("0.");
+                        hayDecimal = true;
+                    } else {
+                        insertarNumero(".");
+                        hayDecimal = true;
+                    }
+                }
             }
         });
     }
